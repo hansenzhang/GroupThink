@@ -1,0 +1,59 @@
+extends layout
+append content
+
+    meta(charset='utf-8')
+    html(ng-app='fileBrowserApp')
+    head
+        title Upload
+        //link(rel="stylesheet" type="text/css" href="client/libs/bootstrap/dist/css/bootstrap.min.css")
+
+        link(rel="stylesheet" type="text/css" href="client/jstree/themes/default/style.min.css")
+
+        link(rel="stylesheet" type="text/css" href="client/css/app.css")
+
+        script(src="/client/libs/angular/angular.min.js" type="text/javascript")
+
+        script(src="/client/libs/angular-route/angular-route.min.js" type="text/javascript")
+
+        script(src="/client/libs/jquery/dist/jquery.min.js")
+
+        script(src="/client/jstree/jstree.min.js")
+
+        script(src="/client/libs/jstree-directive/jsTree.directive.js")
+
+        script(src="/client/js/app.js")
+
+        script(src="/client/js/factory.js")
+
+        script(src="/client/js/controllers.js")
+
+    body.container
+        br
+        br
+        br
+        br
+        div
+            div(class="centered")
+            br
+            button.btn.btn-primary.btn-lg(data-target='#myModal', data-toggle='modal') Upload New File
+            table.table.table-bordered.table-striped(style="width:50%")
+        div#container_id
+        div#files_id
+        div#myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        h4#myModalLabel.modal-title Upload a file
+                    .modal-body
+                        form#groupForm.form-horizontal(method='post', action='/upload' enctype="multipart/form-data")
+                            .form-group
+                                label.col-xs-3.control-label File
+                                .col-xs-5
+                                    input.form-control(type='file', name='file')
+                                .col-xs-5.col-xs-offset-3
+                                    br
+                                    button.btn.btn-primary(type='submit') Save
+                                    button.btn.btn-default(type='button', data-dismiss='modal') Close
+        div.test
+            div(ng-view)

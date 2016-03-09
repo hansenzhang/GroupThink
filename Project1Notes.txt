@@ -1,0 +1,1 @@
+Client folder for file structure based on http://thejackalofjavascript.com/file-browser-with-jstree-angularjs-and-expressjs

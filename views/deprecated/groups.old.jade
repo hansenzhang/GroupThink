@@ -1,0 +1,62 @@
+extends layout
+append content
+
+  button.btn.btn-primary.btn-lg(data-target='#myModal', data-toggle='modal') +
+  div#myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+          h4#myModalLabel.modal-title Create a Group
+        .modal-body 
+          form#groupForm.form-horizontal(method='post', action='/groups')
+            .form-group
+              label.col-xs-3.control-label Name
+              .col-xs-5
+                input.form-control(type='text', name='name')
+            .form-group
+              label.col-xs-3.control-label Description
+              .col-xs-5
+                input.form-control(type='text', name='description')
+            .form-group.control-group
+              label.col-xs-3.control-label(for='select-to') Add Members
+              .col-xs-7
+                select#select-to.contacts(placeholder="Pick some people...", name='users')
+            .form-group
+              .col-xs-5.col-xs-offset-3
+                button.btn.btn-primary(type='submit') Save
+                button.btn.btn-default(type='button', data-dismiss='modal') Close
+  .list-group
+    each item in groups
+      a(href="groups/#{item.id}").list-group-item.active
+        h4.list-group-item-heading= item.name
+        p.list-group-item-text= item.description
+  script.
+    var users = !{JSON.stringify(users)}
+    var groups = !{JSON.stringify(groups)}
+    $('#select-to').selectize({
+    persist: false,
+      maxItems: null,
+      valueField: '_id',
+      labelField: 'name',
+      sortField: [
+        {field: 'name', direction: 'asc'}
+      ],
+      options: !{JSON.stringify(users)},
+      render: {
+        item: function(item, escape) {
+        var name = item.name;
+        return '<div>' +
+          (name ? '<span class="name">' + escape(name) + '</span>' : '') +
+           '</div>';
+        },
+        option: function(item, escape) {
+          var name = item.name;
+          var label = name;
+          var caption = item.email;
+          return '<div>' +
+            '<span class="label">' + escape(label) + '</span>' +
+             (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +'</div>';
+        }
+      }
+    })

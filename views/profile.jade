@@ -1,0 +1,113 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/selectize.css')
+    link(rel='stylesheet', href='/stylesheets/simple-slider.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js')
+    script(src="/javascripts/bootstrap.js")
+    script(src="/javascripts/selectize.js")
+  body
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a#menu-toggle.navbar-brand(href="#menu-toggle") GroupThink     
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='#') Home      
+            li
+              a(href='/') Groups
+          ul.nav.navbar-nav.navbar-right
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false') Profile 
+                span.caret    
+              ul.dropdown-menu(role='menu')
+                li
+                  a(href='/profile') Profile
+                li.divider
+                li
+                  a(href='/logout') Logout
+      #wrapper
+          #sidebar-wrapper
+            ul.sidebar-nav
+                li.sidebar-brand
+                  a(href='#') My Groups
+                    button.btn.btn-default(style='float:right;margin:15px;margin-bottom:10px;',data-target='#myModal', data-toggle='modal', aria-label='Add a Group')
+                        span.glyphicon.glyphicon-plus(aria-hidden='true')
+                each item in groups
+                  li
+                    a(href="#{item.id}")= item.name
+          #page-content-wrapper(style="overflow-y:auto; overflow-x:hidden; padding-bottom:100%; margin-bottom:-100%; min-height:100%;")
+            .container(style="padding-bottom:100%; margin-bottom:-100%; min-height:100%;")
+                .jumbotron.text_center(style="padding-bottom:100%; margin-bottom:-100%; min-height:100%;")
+                    img.img-circle(src= "/images/profile/" + user.google_id + ".png", alt="Profile Picture", width="100", height="100")
+                    h2 Profile
+                    p.
+                      id: #{user._id}
+                    p.
+                      name: #{user.name}
+                    p.
+                      email: #{user.email}
+            .container-fluid(style="padding-bottom:100%; margin-bottom:-100%; min-height:100%;")
+      div#myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+              h4#myModalLabel.modal-title Create a Group
+            .modal-body 
+              form#groupForm.form-horizontal(method='post', action='/')
+                .form-group
+                  label.col-xs-3.control-label Name
+                  .col-xs-5
+                    input.form-control(type='text', name='name')
+                .form-group
+                  label.col-xs-3.control-label Description
+                  .col-xs-5
+                    input.form-control(type='text', name='description')
+                .form-group.control-group
+                  label.col-xs-3.control-label(for='select-to') Add Members
+                  .col-xs-7
+                    select#select-to.contacts(placeholder="Pick some people...", name='users')
+                .form-group
+                  .col-xs-5.col-xs-offset-3
+                    button.btn.btn-primary(type='submit') Save
+                    button.btn.btn-default(type='button', data-dismiss='modal') Close
+  script.
+    var user = !{JSON.stringify(user)}
+    var users = !{JSON.stringify(users)}
+    var groups = !{JSON.stringify(groups)}
+    $('#select-to').selectize({
+    persist: false,
+      maxItems: null,
+      valueField: '_id',
+      labelField: 'name',
+      sortField: [
+        {field: 'name', direction: 'asc'}
+      ],
+      options: !{JSON.stringify(users)},
+      render: {
+        item: function(item, escape) {
+        var name = item.name;
+        return '<div>' +
+          (name ? '<span class="name">' + escape(name) + '</span>' : '') +
+           '</div>';
+        },
+        option: function(item, escape) {
+          var name = item.name;
+          var label = name;
+          var caption = item.email;
+          return '<div>' +
+            '<span class="label">' + escape(label) + '</span>' +
+             (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +'</div>';
+        }
+      }
+    })
+
+block content
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    
+    

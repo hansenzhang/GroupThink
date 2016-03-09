@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/selectize.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js')
+    script(src="/javascripts/bootstrap.js")
+    script(src="/javascripts/selectize.js")
+
+    div#toolbar
+        img(src="/stylesheets/pngs/sonic.png", alt="Logo", height="75", width="66")
+        ul
+            li
+                a(href="/") Home
+            li
+                a(href="/profile") Profile
+            li
+                a(href="/chat") Forum
+            li
+                a(href="/upload") Upload
+
+  body
+      block content
+

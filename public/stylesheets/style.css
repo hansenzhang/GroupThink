@@ -1,0 +1,70 @@
+
+ul {
+   list-style-type: none;
+   margin: 0;
+   padding-bottom: 15px;
+   overflow: hidden;
+
+}
+#toolbar
+{
+     margin-left:125px;
+}
+
+li {
+    float: left;
+}
+
+img{
+    float:left;
+}
+
+a:link, a:visited {
+    display: block;
+
+    width: 120px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: navy;
+    text-align: center;
+    text-transform: uppercase;
+    font: "Lucida Grande", Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
+body {
+     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
+
+#content {
+    padding: 50px;
+
+    width: 800px;
+    margin-left: 75px;
+    margin-right: auto;
+}
+
+#messages {
+    width: 690px;
+    height: 300px;
+    overflow: auto;
+    background-color: #eee;
+    margin-bottom: 1em;
+    margin-right: 10px;
+}
+
+#send-message {
+    width: 700px;
+    margin-bottom: 1em;
+    margin-right: 1em;
+}
+
+#help {
+    font: 10px Helvetica Arial, sans-serif;
+}
